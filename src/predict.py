@@ -25,6 +25,9 @@ AVAILABLE_MODELS = {
     "large-v1",
     "large-v2",
     "large-v3",
+    "distil-large-v2",
+    "distil-large-v3",
+    "distil-large-v3.5",
     "turbo",
 }
 
@@ -187,13 +190,13 @@ class Predictor:
             word_timestamps_list = []
             for segment in segments:
                 for word in segment.words:
-                    word_timestamps_list.append(
-                        {
-                            "word": word.word,
-                            "start": word.start,
-                            "end": word.end,
-                        }
-                    )
+                    word_entry = {
+                        "word": word.word,
+                        "start": word.start,
+                        "end": word.end,
+                        "probability": word.probability,
+                    }
+                    word_timestamps_list.append(word_entry)
             results["word_timestamps"] = word_timestamps_list
 
         return results
